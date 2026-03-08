@@ -47,7 +47,3 @@ The core logic is powered by **LangGraph**, treating the campaign optimization a
 
 * **MLflow UI:** `http://localhost:5000`
 * **Grafana Dashboard:** `http://localhost:3000`
-
----
-
-**Would you like me to generate the `docker-compose.yml` file to help you spin up the MLflow, Prometheus, and FastAPI services simultaneously?**
