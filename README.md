@@ -41,9 +41,3 @@ The core logic is powered by **LangGraph**, treating the campaign optimization a
 * **Bayesian Optimization:** Moves beyond simple A/B testing to understand the probability of a variant's success.
 * **Automated MLOps Pipeline:** * **MLflow:** Logs prompt versions and CTR performance.
 * **Grafana:** Visualizes variant win-rates across different segments in real-time.
-
-
-* **Style Injection:** Uses the Enron dataset to maintain professional, human-like correspondence styles.
-
-* **MLflow UI:** `http://localhost:5000`
-* **Grafana Dashboard:** `http://localhost:3000`
