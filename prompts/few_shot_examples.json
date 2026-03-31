@@ -1,0 +1,48 @@
+{
+  "young_professional": [
+    {
+      "customer_context": "Age: 28, Interests: tech, fitness. Preferred Tone: casual. Goal: Product Launch",
+      "subject": "Wait until you see our new smart tracker 👀",
+      "body": "Hey Alex, knowing how much you're into optimizing your fitness routine, we wanted you to be the first to know: our new SmartTracker Pro drops tomorrow. It syncs perfectly with your current tech stack. Click below to grab early access before we go public.",
+      "variant_style": "A"
+    },
+    {
+      "customer_context": "Age: 25, Interests: investing, travel. Preferred Tone: casual. Goal: Product Launch",
+      "subject": "Your travel portfolio just got an upgrade ✈️",
+      "body": "Hey Chris! We noticed you love looking out for top-tier travel investments. Our newest premium card is tailor-made for nomads like you. No lengthy corporate pitch—just straight, aggressive ROI on your miles. Claim your spot on the waitlist now.",
+      "variant_style": "B"
+    }
+  ],
+  "parent": [
+    {
+      "customer_context": "Age: 38, Interests: cooking, home decor. Preferred Tone: friendly. Goal: Special Discount",
+      "subject": "Make dinner time a little less chaotic 🍲 + 20% off",
+      "body": "Hi Taylor, we know family dinners can be a whirlwind. We thought this exclusive 20% discount on our new fast-prep meal kits might give you some precious time back. We're here to make your evenings just a little easier. Enjoy!",
+      "variant_style": "A"
+    }
+  ],
+  "retiree": [
+    {
+      "customer_context": "Age: 68, Interests: reading, gardening. Preferred Tone: formal. Goal: Newsletter Signup",
+      "subject": "An Invitation: Join our Exclusive Gardening Masterclass",
+      "body": "Dear Morgan, we are delighted to invite you to our upcoming virtual seminar on advanced gardening techniques. Recognizing your sustained interest in the subject, we believe you will find the comprehensive curriculum both educational and deeply rewarding. Please RSVP at your earliest convenience.",
+      "variant_style": "A"
+    }
+  ],
+  "student": [
+    {
+      "customer_context": "Age: 20, Interests: gaming, technology. Preferred Tone: casual. Goal: Flash Sale",
+      "subject": "BRB, grabbing this deal 🔥 50% off gaming gear",
+      "body": "Yo Sam! Final hours on our mid-terms flash sale. Upgrade your rig for 50% off. You know these sell out fast, so don't sleep on it. Grab yours before midnight.",
+      "variant_style": "A"
+    }
+  ],
+  "executive": [
+    {
+      "customer_context": "Age: 45, Interests: investing, automobiles. Preferred Tone: formal. Goal: Premium Event Invite",
+      "subject": "Exclusive: Q3 Executive Investment Briefing",
+      "body": "Jordan, you are invited to an exclusive, invite-only briefing on emerging investment trends in the automotive sector. This 30-minute session is designed strictly to deliver actionable ROI strategies. Secure your reservation below.",
+      "variant_style": "A"
+    }
+  ]
+}

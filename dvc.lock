@@ -1,0 +1,43 @@
+schema: '2.0'
+stages:
+  preprocess_enron:
+    cmd: .\venv\Scripts\python data/scripts/preprocess_enron.py
+    deps:
+    - path: data/raw/enron/
+      hash: md5
+      md5: d751713988987e9331980363e24189ce.dir
+      size: 0
+      nfiles: 0
+    - path: data/scripts/preprocess_enron.py
+      hash: md5
+      md5: e2e05d6f46b83f199de88c45ef793544
+      size: 2595
+    outs:
+    - path: data/processed/enron_clean.csv
+      hash: md5
+      md5: 8377c033f1233c56b4934c45d45c9198
+      size: 29691
+  generate_profiles:
+    cmd: .\venv\Scripts\python data/scripts/generate_crm_profiles.py
+    deps:
+    - path: data/scripts/generate_crm_profiles.py
+      hash: md5
+      md5: 6e27055301fb8d531b68c22d59cc14c0
+      size: 2297
+    outs:
+    - path: data/processed/crm_profiles.csv
+      hash: md5
+      md5: f3cd9fe37db81d208a96dae04dfb1fc9
+      size: 114124
+  generate_benchmarks:
+    cmd: .\venv\Scripts\python data/scripts/generate_benchmarks.py
+    deps:
+    - path: data/scripts/generate_benchmarks.py
+      hash: md5
+      md5: 35ae2fa172c3c4cf5b589aaacd11eede
+      size: 1924
+    outs:
+    - path: data/processed/benchmarks.csv
+      hash: md5
+      md5: 15fd2c5ddad93dca6c0c0860cd658971
+      size: 503
