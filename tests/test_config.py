@@ -52,6 +52,8 @@ def test_settings_anthropic_provider():
     )
 
     assert s.llm_provider == "anthropic"
+
+
 def test_settings_google_provider():
     """Verify Google Gemini provider configuration."""
     from app.core.config import Settings

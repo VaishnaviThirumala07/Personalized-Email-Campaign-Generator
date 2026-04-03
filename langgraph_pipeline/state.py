@@ -10,22 +10,22 @@ from typing import TypedDict, Optional
 class VariantData(TypedDict):
     """A single email variant with its metadata."""
 
-    variant_id: str          # "A", "B", etc.
-    subject: str             # Email subject line
-    body: str                # Email body content
-    style_notes: str         # Description of the style approach used
+    variant_id: str  # "A", "B", etc.
+    subject: str  # Email subject line
+    body: str  # Email body content
+    style_notes: str  # Description of the style approach used
 
 
 class SimulationResult(TypedDict):
     """Simulated A/B test results for a single variant."""
 
     variant_id: str
-    open_rate: float         # Simulated open rate (0-1)
-    ctr: float               # Simulated click-through rate (0-1)
-    conversion_rate: float   # Simulated conversion rate (0-1)
-    num_recipients: int      # Number of simulated recipients
-    num_opens: int           # Simulated opens
-    num_clicks: int          # Simulated clicks
+    open_rate: float  # Simulated open rate (0-1)
+    ctr: float  # Simulated click-through rate (0-1)
+    conversion_rate: float  # Simulated conversion rate (0-1)
+    num_recipients: int  # Number of simulated recipients
+    num_opens: int  # Simulated opens
+    num_clicks: int  # Simulated clicks
 
 
 class PromptSnapshot(TypedDict):
@@ -46,25 +46,25 @@ class CampaignState(TypedDict):
     """
 
     # ── Input ──────────────────────────────────────────────────────
-    customer_profile: dict          # Full customer profile (from API)
-    segment: str                    # Resolved customer segment
-    campaign_goal: str              # E.g., "increase_engagement"
+    customer_profile: dict  # Full customer profile (from API)
+    segment: str  # Resolved customer segment
+    campaign_goal: str  # E.g., "increase_engagement"
 
     # ── Generation ─────────────────────────────────────────────────
-    variants: list[VariantData]     # Generated email variants (A & B)
+    variants: list[VariantData]  # Generated email variants (A & B)
 
     # ── Simulation ─────────────────────────────────────────────────
     simulation_results: list[SimulationResult]  # Per-variant sim results
 
     # ── Evaluation ─────────────────────────────────────────────────
-    winner: Optional[VariantData]   # The winning variant (if determined)
-    winner_confidence: float        # Bayesian confidence (0-1)
-    is_winner_determined: bool      # Whether a clear winner was found
+    winner: Optional[VariantData]  # The winning variant (if determined)
+    winner_confidence: float  # Bayesian confidence (0-1)
+    is_winner_determined: bool  # Whether a clear winner was found
 
     # ── Iteration Tracking ─────────────────────────────────────────
-    iteration: int                  # Current iteration number
-    max_iterations: int             # Maximum allowed iterations
+    iteration: int  # Current iteration number
+    max_iterations: int  # Maximum allowed iterations
     prompt_history: list[PromptSnapshot]  # Evolution of prompts over time
 
     # ── Error Handling ─────────────────────────────────────────────
-    error: Optional[str]            # Error message if something fails
+    error: Optional[str]  # Error message if something fails

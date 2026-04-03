@@ -8,10 +8,11 @@ from langchain.prompts import (
     FewShotPromptTemplate,
     SystemMessagePromptTemplate,
     HumanMessagePromptTemplate,
-    ChatPromptTemplate
+    ChatPromptTemplate,
 )
 import json
 import os
+
 
 def load_few_shot_examples() -> dict:
     """Load the JSON repository of few-shot examples."""
@@ -23,15 +24,17 @@ def load_few_shot_examples() -> dict:
         return {}
 
 
-def get_campaign_prompt_template(segment: str, system_guidance: str = "") -> ChatPromptTemplate:
+def get_campaign_prompt_template(
+    segment: str, system_guidance: str = ""
+) -> ChatPromptTemplate:
     """
     Constructs a dynamic ChatPromptTemplate equipped with segment-specific few-shot examples.
-    
+
     Args:
         segment: The customer segment (e.g., "young_professional").
         system_guidance: Dynamically evolved instructions from the optimization loop.
     """
-    
+
     # 1. Base System Prompt
     system_template = """You are an expert, world-class email marketing copywriter. 
 Your goal is to write highly personalized email marketing copy that drives high CTR.
@@ -54,25 +57,25 @@ Variant Style: {variant_style}
 """
     example_prompt = PromptTemplate(
         input_variables=["customer_context", "subject", "body", "variant_style"],
-        template=example_template
+        template=example_template,
     )
-    
+
     # Retrieve segment examples
     all_examples = load_few_shot_examples()
     segment_examples = all_examples.get(segment, [])
-    
+
     # Prefix text introducing the examples
     prefix = ""
     if segment_examples:
         prefix = "Here are some highly successful examples for this segment previously:"
-        
+
     few_shot_prompt = FewShotPromptTemplate(
         examples=segment_examples,
         example_prompt=example_prompt,
         prefix=prefix,
         suffix="Now generate exactly TWO distinct variants (Variant A and Variant B) for the following customer.",
         input_variables=[],
-        example_separator="\n\n"
+        example_separator="\n\n",
     )
 
     # 3. Final Human Command
@@ -107,10 +110,12 @@ Format your response EXACTLY as valid JSON with the following structure:
 }}
 Ensure the JSON is perfectly valid and contains no markdown backticks outside of what's strictly required by the API.
 """
-    
+
     # Assemble into a sequence
-    return ChatPromptTemplate.from_messages([
-        SystemMessagePromptTemplate.from_template(system_template),
-        HumanMessagePromptTemplate.from_template(few_shot_prompt.format()),
-        HumanMessagePromptTemplate.from_template(human_template)
-    ]).partial(segment=segment, system_guidance=system_guidance)
+    return ChatPromptTemplate.from_messages(
+        [
+            SystemMessagePromptTemplate.from_template(system_template),
+            HumanMessagePromptTemplate.from_template(few_shot_prompt.format()),
+            HumanMessagePromptTemplate.from_template(human_template),
+        ]
+    ).partial(segment=segment, system_guidance=system_guidance)

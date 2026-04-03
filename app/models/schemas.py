@@ -16,9 +16,7 @@ class PurchaseHistory(BaseModel):
     frequency: str = Field(
         ..., description="Purchase frequency: daily, weekly, monthly, yearly"
     )
-    categories: list[str] = Field(
-        ..., description="Product categories purchased"
-    )
+    categories: list[str] = Field(..., description="Product categories purchased")
 
 
 class CustomerProfile(BaseModel):
@@ -31,9 +29,7 @@ class CustomerProfile(BaseModel):
         ...,
         description="Customer segment: young_professional, parent, retiree, student, executive",
     )
-    interests: list[str] = Field(
-        ..., description="List of customer interests"
-    )
+    interests: list[str] = Field(..., description="List of customer interests")
     purchase_history: PurchaseHistory = Field(
         ..., description="Summary of purchase behavior"
     )

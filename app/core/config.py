@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     """Central configuration for the Email Campaign Generator."""
 
     # ── LLM Configuration ──────────────────────────────────────────
-    google_api_key:str=Field(default="",description="Google Gemini API key")
+    google_api_key: str = Field(default="", description="Google Gemini API key")
     llm_provider: Literal["openai", "anthropic", "google", "gemini"] = Field(
         default="google",
         description="Which LLM provider to use",
