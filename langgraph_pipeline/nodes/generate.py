@@ -11,18 +11,14 @@ def get_llm():
     """Initialize the LLM based on settings."""
     if settings.llm_provider == "openai":
         from langchain_openai import ChatOpenAI
-        return ChatOpenAI(
-            model=settings.llm_model, 
-            temperature=settings.llm_temperature, 
-            api_key=settings.openai_api_key
-        )
-    else:
+        return ChatOpenAI(model=settings.llm_model, temperature=settings.llm_temperature, api_key=settings.openai_api_key)
+    elif settings.llm_provider == "anthropic":
         from langchain_anthropic import ChatAnthropic
-        return ChatAnthropic(
-            model=settings.llm_model, 
-            temperature=settings.llm_temperature, 
-            api_key=settings.anthropic_api_key
-        )
+        return ChatAnthropic(model=settings.llm_model, temperature=settings.llm_temperature, api_key=settings.anthropic_api_key)
+    elif settings.llm_provider == "google":
+        from langchain_google_genai import ChatGoogleGenerativeAI
+        return ChatGoogleGenerativeAI(model=settings.llm_model, temperature=settings.llm_temperature, google_api_key=settings.google_api_key)
+
 
 def generate_variants_node(state: CampaignState) -> dict:
     """
