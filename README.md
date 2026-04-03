@@ -1,6 +1,6 @@
 # Personalized Email Campaign Generator with A/B Testing
 
-> **GAI33** — A GenAI system that generates personalized marketing email variants, runs simulated A/B tests, learns which copy performs better per customer segment, and iteratively improves generation using LangGraph.
+>  A GenAI system that generates personalized marketing email variants, runs simulated A/B tests, learns which copy performs better per customer segment, and iteratively improves generation using LangGraph.
 
 ---
 
