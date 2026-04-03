@@ -1,6 +1,5 @@
 from fastapi import APIRouter, HTTPException, BackgroundTasks
 from pydantic import BaseModel
-from typing import Optional, Dict
 
 from langgraph_pipeline.graph import build_campaign_graph
 from app.core.mlflow_utils import log_campaign_start, log_campaign_end

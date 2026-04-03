@@ -6,8 +6,10 @@ Personalized Email Campaign Generator with A/B Testing.
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from prometheus_fastapi_instrumentator import Instrumentator
 from app.core.config import settings
 from app.models.schemas import HealthResponse
+from app.api.routes import router as api_router
 
 # ── App Initialization ──────────────────────────────────────────────
 app = FastAPI(
@@ -31,7 +33,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-from prometheus_fastapi_instrumentator import Instrumentator
 Instrumentator().instrument(app).expose(app)
 
 
@@ -56,5 +57,4 @@ async def startup_event():
 
 
 # ── API Routes (Linked in Phase 5&6) ────────────────────────────
-from app.api.routes import router as api_router
 app.include_router(api_router, prefix="/api/v1")

@@ -4,8 +4,7 @@ LangGraph state definition for the campaign optimization pipeline.
 The state flows through: segment → generate → simulate → evaluate → update
 """
 
-from typing import TypedDict, Optional, Annotated
-from operator import add
+from typing import TypedDict, Optional
 
 
 class VariantData(TypedDict):

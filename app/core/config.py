@@ -14,12 +14,12 @@ class Settings(BaseSettings):
 
     # ── LLM Configuration ──────────────────────────────────────────
     google_api_key:str=Field(default="",description="Google Gemini API key")
-    llm_provider: Literal["openai", "anthropic", "google"] = Field(
-        default="gemini",
+    llm_provider: Literal["openai", "anthropic", "google", "gemini"] = Field(
+        default="google",
         description="Which LLM provider to use",
     )
     llm_model: str = Field(
-        default="gemini-2.5-flash",
+        default="gemini-1.5-flash",
         description="Model name for the selected provider",
     )
     llm_temperature: float = Field(

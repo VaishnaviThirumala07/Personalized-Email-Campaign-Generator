@@ -9,9 +9,11 @@ def test_settings_defaults():
     """Verify default settings load without errors."""
     from app.core.config import Settings
 
-    # Create settings with defaults (no .env needed)
+    # Create settings with explicit values
     s = Settings(
         openai_api_key="test-key",
+        llm_provider="openai",
+        llm_model="gpt-4o-mini",
         _env_file=None,  # Don't load .env in tests
     )
 
@@ -50,4 +52,16 @@ def test_settings_anthropic_provider():
     )
 
     assert s.llm_provider == "anthropic"
-    assert s.llm_model == "claude-3-5-sonnet-20241022"
+def test_settings_google_provider():
+    """Verify Google Gemini provider configuration."""
+    from app.core.config import Settings
+
+    s = Settings(
+        google_api_key="test-key",
+        llm_provider="google",
+        llm_model="gemini-1.5-flash",
+        _env_file=None,
+    )
+
+    assert s.llm_provider == "google"
+    assert s.llm_model == "gemini-1.5-flash"

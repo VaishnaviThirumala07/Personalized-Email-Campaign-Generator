@@ -6,7 +6,6 @@ from langgraph_pipeline.state import CampaignState, SimulationResult
 from app.core.config import settings
 import pandas as pd
 import numpy as np
-import os
 
 def simulate_node(state: CampaignState) -> dict:
     """

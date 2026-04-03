@@ -2,9 +2,8 @@
 Update Prompt Node — Evolve prompts based on winning variants.
 """
 
-from langgraph_pipeline.state import CampaignState, PromptSnapshot
+from langgraph_pipeline.state import CampaignState
 import json
-import os
 
 def update_prompt_node(state: CampaignState) -> dict:
     """
