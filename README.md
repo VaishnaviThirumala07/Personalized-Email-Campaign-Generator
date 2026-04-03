@@ -17,7 +17,7 @@ Customer Profile → [Segment] → [Generate Variants] → [Simulate A/B] → [E
 | Layer | Technology |
 |---|---|
 | **LLM Orchestration** | LangGraph, LangChain |
-| **LLM Provider** | OpenAI / Anthropic |
+| **LLM Provider** | Gemini |
 | **API** | FastAPI |
 | **MLOps** | MLflow, DVC |
 | **Monitoring** | Prometheus, Grafana |
@@ -31,7 +31,7 @@ Customer Profile → [Segment] → [Generate Variants] → [Simulate A/B] → [E
 ### Prerequisites
 - Python 3.11+
 - Docker & Docker Compose (optional, for full stack)
-- OpenAI or Anthropic API key
+- Gemini API key
 
 ### 1. Clone & Setup
 
