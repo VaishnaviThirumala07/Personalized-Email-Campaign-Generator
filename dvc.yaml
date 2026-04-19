@@ -4,7 +4,7 @@
 
 stages:
   preprocess_enron:
-    cmd: .\venv\Scripts\python data/scripts/preprocess_enron.py
+    cmd: python data/scripts/preprocess_enron.py
     deps:
       - data/raw/enron/
       - data/scripts/preprocess_enron.py
@@ -12,14 +12,14 @@ stages:
       - data/processed/enron_clean.csv
 
   generate_profiles:
-    cmd: .\venv\Scripts\python data/scripts/generate_crm_profiles.py
+    cmd: python data/scripts/generate_crm_profiles.py
     deps:
       - data/scripts/generate_crm_profiles.py
     outs:
       - data/processed/crm_profiles.csv
 
   generate_benchmarks:
-    cmd: .\venv\Scripts\python data/scripts/generate_benchmarks.py
+    cmd: python data/scripts/generate_benchmarks.py
     deps:
       - data/scripts/generate_benchmarks.py
     outs:

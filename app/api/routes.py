@@ -1,3 +1,7 @@
+"""
+API routes for campaign generation.
+"""
+
 from fastapi import APIRouter, HTTPException, BackgroundTasks
 from pydantic import BaseModel
 
@@ -8,17 +12,17 @@ from app.models.schemas import CustomerProfile, CampaignResponse, VariantResult
 router = APIRouter()
 
 
-class CampaignRequest(BaseModel):
+class CampaignRequestBody(BaseModel):
     customer_profile: CustomerProfile
-    campaign_goal: str
+    campaign_goal: str = "increase_engagement"
 
 
 @router.post("/generate_campaign", response_model=CampaignResponse)
-def generate_campaign(request: CampaignRequest, background_tasks: BackgroundTasks):
+def generate_campaign(request: CampaignRequestBody, background_tasks: BackgroundTasks):
     """
     Trigger the LangGraph workflow to optimize an email campaign using A/B testing logic.
     """
-    profile_dict = request.customer_profile.dict()
+    profile_dict = request.customer_profile.model_dump()
     segment = request.customer_profile.segment or "young_professional"
 
     # 1. Start MLFlow Tracking
@@ -41,8 +45,7 @@ def generate_campaign(request: CampaignRequest, background_tasks: BackgroundTask
         "error": None,
     }
 
-    # 3. Stream pipeline synchronously (we can make it asynchronous fully later)
-    # Using `.invoke()` directly processes the entire graph until end.
+    # 3. Invoke the full graph pipeline
     try:
         final_state = graph.invoke(initial_state, {"recursion_limit": 20})
 

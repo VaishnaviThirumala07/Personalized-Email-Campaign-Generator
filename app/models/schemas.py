@@ -16,7 +16,9 @@ class PurchaseHistory(BaseModel):
     frequency: str = Field(
         ..., description="Purchase frequency: daily, weekly, monthly, yearly"
     )
-    categories: list[str] = Field(..., description="Product categories purchased")
+    categories: list[str] = Field(
+        default_factory=list, description="Product categories purchased"
+    )
 
 
 class CustomerProfile(BaseModel):
@@ -26,10 +28,12 @@ class CustomerProfile(BaseModel):
     name: str = Field(..., description="Customer's full name")
     age: int = Field(..., ge=13, le=120, description="Customer age")
     segment: str = Field(
-        ...,
+        default="young_professional",
         description="Customer segment: young_professional, parent, retiree, student, executive",
     )
-    interests: list[str] = Field(..., description="List of customer interests")
+    interests: list[str] = Field(
+        default_factory=list, description="List of customer interests"
+    )
     purchase_history: PurchaseHistory = Field(
         ..., description="Summary of purchase behavior"
     )
@@ -110,6 +114,32 @@ class CampaignResult(BaseModel):
     improvement_pct: float = Field(
         ..., description="Percentage CTR improvement over baseline"
     )
+
+
+class VariantResult(BaseModel):
+    """A generated variant result with style notes."""
+
+    variant_id: str = Field(..., description="Variant identifier (A, B, etc.)")
+    subject: str = Field(..., description="Email subject line")
+    body: str = Field(..., description="Email body content")
+    style_notes: str = Field(default="", description="Style approach description")
+
+
+class CampaignResponse(BaseModel):
+    """Response from the campaign generation endpoint."""
+
+    campaign_id: str = Field(..., description="Generated campaign ID")
+    segment: str = Field(..., description="Target segment")
+    generated_variants: list[VariantResult] = Field(
+        default_factory=list, description="Generated email variants"
+    )
+    winning_variant_id: Optional[str] = Field(
+        None, description="ID of the winning variant"
+    )
+    confidence_score: float = Field(
+        default=0.0, description="Bayesian confidence score"
+    )
+    iterations_run: int = Field(default=0, description="Total iterations run")
 
 
 class HealthResponse(BaseModel):
