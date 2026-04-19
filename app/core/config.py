@@ -38,7 +38,7 @@ class Settings(BaseSettings):
 
     # ── MLflow ─────────────────────────────────────────────────────
     mlflow_tracking_uri: str = Field(
-        default="http://localhost:5000",
+        default="",
         description="MLflow tracking server URI",
     )
     mlflow_experiment_name: str = Field(

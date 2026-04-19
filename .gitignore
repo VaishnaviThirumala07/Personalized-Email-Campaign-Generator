@@ -41,6 +41,7 @@ mlartifacts/
 # ============================================
 /data/raw/
 /data/processed/*.csv
+!/data/processed/benchmarks.csv
 *.dvc.lock
 
 # ============================================

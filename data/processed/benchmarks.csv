@@ -1,0 +1,6 @@
+segment,base_open_rate,base_ctr,best_performing_style,avoid_style
+young_professional,0.35,0.08,"casual, concise, FOMO-driven","too formal, lengthy walls of text"
+parent,0.28,0.05,"friendly, benefit-focused, empathetic",overly aggressive urgency
+retiree,0.42,0.1,"formal, detailed, trustworthy","slang, confusing tech jargon"
+student,0.22,0.04,"highly casual, meme-friendly, highly urgent",corporate speak
+executive,0.38,0.07,"professional, highly concise, ROI-focused","fluff, friendly chit-chat"
