@@ -77,43 +77,6 @@ This starts:
 pytest tests/ -v
 ```
 
----
-
-## 📁 Project Structure
-
-```
-ResumeProject/
-├── app/                        # FastAPI application
-│   ├── api/                    # REST API routes
-│   ├── core/config.py          # Settings (Pydantic BaseSettings)
-│   ├── models/schemas.py       # Request/response Pydantic models
-│   └── main.py                 # FastAPI entry point
-├── langgraph_pipeline/         # LangGraph workflow
-│   ├── nodes/                  # Individual graph nodes
-│   │   ├── segment.py          # Customer segmentation
-│   │   ├── generate.py         # LLM email variant generation
-│   │   ├── simulate.py         # A/B test simulation
-│   │   ├── evaluate.py         # Bayesian evaluation
-│   │   └── update_prompt.py    # Prompt evolution
-│   ├── state.py                # Graph state definition
-│   └── graph.py                # Graph construction
-├── data/                       # Datasets (DVC-tracked)
-│   ├── raw/                    # Raw Enron emails
-│   ├── processed/              # Cleaned data + CRM profiles
-│   └── scripts/                # Data processing scripts
-├── prompts/                    # Prompt templates & few-shot examples
-├── tests/                      # Test suite
-├── monitoring/                 # Prometheus + Grafana configs
-├── .github/workflows/ci.yml    # GitHub Actions CI
-├── Dockerfile                  # Container image
-├── docker-compose.yml          # Full stack orchestration
-├── dvc.yaml                    # DVC pipeline definition
-├── requirements.txt            # Python dependencies
-└── README.md                   # This file
-```
-
----
-
 ## 📊 API Endpoints
 
 | Method | Endpoint | Description |
@@ -124,7 +87,3 @@ ResumeProject/
 | `GET` | `/api/v1/health` | Health check |
 
 ---
-
-## 📄 License
-
-This project is for educational and portfolio purposes.
