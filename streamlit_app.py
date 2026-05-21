@@ -510,7 +510,7 @@ def main():
     st.markdown(
         """
     <div class="hero-container">
-        <div class="hero-title">📧 Personalized Email Campaign Generator</div>
+        <div class="hero-title">Personalized Email Campaign Generator</div>
         <div class="hero-subtitle">
             GenAI-powered A/B testing with LangGraph · Bayesian evaluation · Iterative prompt optimization
         </div>
@@ -521,11 +521,11 @@ def main():
 
     # ── Sidebar: Customer Profile Builder ──────────────────────────
     with st.sidebar:
-        st.markdown("### 🎯 Customer Profile")
+        st.markdown("### Customer Profile")
         st.markdown("---")
 
         segments = get_segment_config()
-        segment_options = {f"{v['icon']} {v['label']}": k for k, v in segments.items()}
+        segment_options = {v['label']: k for k, v in segments.items()}
 
         selected_display = st.selectbox(
             "Customer Segment",
@@ -576,7 +576,7 @@ def main():
         )
 
         st.markdown("---")
-        st.markdown("### ⚙️ Campaign Settings")
+        st.markdown("### Campaign Settings")
 
         campaign_goal = st.text_input(
             "Campaign Goal",
@@ -610,7 +610,7 @@ def main():
         }
 
         run_pipeline = st.button(
-            "🚀 Run Campaign Pipeline",
+            "Run Campaign Pipeline",
             use_container_width=True,
             type="primary",
         )
@@ -627,17 +627,17 @@ def main():
                 status_display = st.empty()
 
         pipeline_steps = [
-            ("🔍", "Segmenting customer..."),
-            ("✍️", "Generating email variants..."),
-            ("🧪", "Running A/B simulation..."),
-            ("📊", "Bayesian evaluation..."),
-            ("🔄", "Updating prompts..."),
+            "Segmenting customer...",
+            "Generating email variants...",
+            "Running A/B simulation...",
+            "Bayesian evaluation...",
+            "Updating prompts...",
         ]
 
-        for i, (icon, desc) in enumerate(pipeline_steps):
-            progress_bar.progress((i + 1) / len(pipeline_steps), text=f"{icon} {desc}")
+        for i, desc in enumerate(pipeline_steps):
+            progress_bar.progress((i + 1) / len(pipeline_steps), text=desc)
             status_display.markdown(
-                f"<div style='text-align:center; color:#818cf8; font-weight:600;'>{icon}</div>",
+                f"<div style='text-align:center; color:#818cf8; font-weight:600;'>Running</div>",
                 unsafe_allow_html=True,
             )
             time.sleep(0.5)
@@ -645,15 +645,15 @@ def main():
         # Actually run the pipeline
         results = run_demo_pipeline(customer_profile, campaign_goal, max_iterations)
 
-        progress_bar.progress(1.0, text="✅ Pipeline complete!")
+        progress_bar.progress(1.0, text="Pipeline complete!")
         status_display.markdown(
-            "<div style='text-align:center; color:#34d399; font-weight:600;'>✅</div>",
+            "<div style='text-align:center; color:#34d399; font-weight:600;'>Complete</div>",
             unsafe_allow_html=True,
         )
 
         if results.get("demo_mode"):
             st.info(
-                "🎭 **Demo Mode** — Running with simulated LLM responses. "
+                "**Demo Mode** — Running with simulated LLM responses. "
                 "Configure a valid API key in `.env` to use actual LLM generation.",
                 icon="ℹ️",
             )
@@ -668,7 +668,7 @@ def main():
         final = results["final_state"]
 
         # ── Top Metrics Row ────────────────────────────────────────
-        st.markdown("### 📊 Campaign Results")
+        st.markdown("### Campaign Results")
 
         m1, m2, m3, m4 = st.columns(4)
         with m1:
@@ -682,7 +682,7 @@ def main():
                 unsafe_allow_html=True,
             )
         with m2:
-            winner_text = "✅ Yes" if final.get("is_winner_determined") else "❌ No"
+            winner_text = "Yes" if final.get("is_winner_determined") else "No"
             st.markdown(
                 f"""
             <div class="metric-card">
@@ -704,15 +704,15 @@ def main():
                 unsafe_allow_html=True,
             )
         with m4:
-            segment_display = get_segment_config().get(
+            segment_label = get_segment_config().get(
                 final.get("segment", ""),
-                {"icon": "🎯", "label": final.get("segment", "")},
-            )
+                {"label": final.get("segment", "").replace("_", " ").title()},
+            )["label"]
             st.markdown(
                 f"""
             <div class="metric-card">
-                <div class="metric-value">{segment_display["icon"]}</div>
-                <div class="metric-label">{segment_display["label"]}</div>
+                <div class="metric-value" style="font-size: 1.5rem; word-break: break-all; padding: 0.25rem 0;">{segment_label}</div>
+                <div class="metric-label">Target Segment</div>
             </div>
             """,
                 unsafe_allow_html=True,
@@ -723,10 +723,10 @@ def main():
         # ── Tabs ───────────────────────────────────────────────────
         tab1, tab2, tab3, tab4 = st.tabs(
             [
-                "📧 Email Variants",
-                "📈 A/B Test Results",
-                "🔬 Pipeline Trace",
-                "📋 Raw State",
+                "Email Variants",
+                "A/B Test Results",
+                "Pipeline Trace",
+                "Raw State",
             ]
         )
 
@@ -764,7 +764,7 @@ def render_email_variants(final: dict):
             badge_class = "variant-badge winner-badge" if is_winner else "variant-badge"
             card_class = "email-card winner" if is_winner else "email-card"
             badge_text = (
-                f"🏆 WINNER — Variant {v.get('variant_id', '?')}"
+                f"WINNER — Variant {v.get('variant_id', '?')}"
                 if is_winner
                 else f"Variant {v.get('variant_id', '?')}"
             )
@@ -779,7 +779,7 @@ def render_email_variants(final: dict):
                 f"""
             <div class="{card_class}">
                 <span class="{badge_class}">{badge_text}</span>
-                <div class="email-subject">📬 {v.get("subject", "No Subject")}</div>
+                <div class="email-subject">{v.get("subject", "No Subject")}</div>
                 <div class="email-body">{v.get("body", "No body content")}</div>
             </div>
             """,
@@ -803,7 +803,7 @@ def render_email_variants(final: dict):
                 )
 
             # Style notes expander
-            with st.expander(f"🎨 Style Notes — Variant {v.get('variant_id', '?')}"):
+            with st.expander(f"Style Notes — Variant {v.get('variant_id', '?')}"):
                 st.markdown(
                     f"**Psychological Approach:** {v.get('style_notes', 'N/A')}"
                 )
@@ -909,7 +909,7 @@ def render_ab_results(results: dict):
         st.plotly_chart(fig_open, use_container_width=True)
 
     # ── Bayesian Posterior Visualization ────────────────────────────
-    st.markdown("#### 🔬 Bayesian Posterior Distribution")
+    st.markdown("#### Bayesian Posterior Distribution")
 
     if len(sim_results) >= 2:
         from scipy.stats import beta as beta_dist
@@ -978,7 +978,7 @@ def render_ab_results(results: dict):
         st.plotly_chart(fig_posterior, use_container_width=True)
 
     # ── Full Metrics Table ─────────────────────────────────────────
-    st.markdown("#### 📋 Detailed Simulation Metrics")
+    st.markdown("#### Detailed Simulation Metrics")
     df_display = pd.DataFrame(sim_results)
     df_display.columns = [col.replace("_", " ").title() for col in df_display.columns]
     st.dataframe(
@@ -1001,15 +1001,7 @@ def render_pipeline_trace(results: dict):
         st.warning("No pipeline trace available.")
         return
 
-    st.markdown("#### 🔄 LangGraph Execution Flow")
-
-    node_icons = {
-        "segment": "🔍",
-        "generate_variants": "✍️",
-        "simulate": "🧪",
-        "evaluate": "📊",
-        "update_prompt": "🔄",
-    }
+    st.markdown("#### LangGraph Execution Flow")
 
     # Graph visualization
     nodes_order = [
@@ -1022,16 +1014,15 @@ def render_pipeline_trace(results: dict):
     executed = [s["node"] for s in steps]
 
     for node in nodes_order:
-        icon = node_icons.get(node, "⬜")
         is_done = node in executed
         status_class = "done" if is_done else ""
-        status_icon = "✅" if is_done else "⬜"
+        status_icon = "●" if is_done else "○"
 
         st.markdown(
             f"""
         <div class="pipeline-step {status_class}">
             <span class="step-icon">{status_icon}</span>
-            <span class="step-text">{icon} {node.replace("_", " ").title()}</span>
+            <span class="step-text">{node.replace("_", " ").title()}</span>
         </div>
         """,
             unsafe_allow_html=True,
@@ -1040,89 +1031,27 @@ def render_pipeline_trace(results: dict):
     st.markdown("<br>", unsafe_allow_html=True)
 
     # Detailed step log
-    st.markdown("#### 📜 Step-by-Step Log")
+    st.markdown("#### Step-by-Step Log")
 
     for i, step in enumerate(steps):
         node = step["node"]
-        icon = node_icons.get(node, "⬜")
         with st.expander(
-            f"Step {i + 1}: {icon} {node.replace('_', ' ').title()}", expanded=(i == 0)
+            f"Step {i + 1}: {node.replace('_', ' ').title()}", expanded=(i == 0)
         ):
             st.json(step["state"])
 
 
 def render_raw_state(final: dict):
     """Render the raw pipeline state for debugging."""
-    st.markdown("#### 🔧 Final Pipeline State (JSON)")
+    st.markdown("#### Final Pipeline State (JSON)")
     st.json(final)
 
 
 def render_welcome_state():
-    """Render the welcome / empty state with architecture overview."""
-
-    st.markdown("### 🏗️ Architecture Overview")
-
-    col1, col2 = st.columns([2, 1])
-
-    with col1:
-        st.markdown(
-            """
-        This application demonstrates a **GenAI-powered email campaign optimization system** 
-        built with modern MLOps tooling:
-
-        | Component | Technology | Purpose |
-        |-----------|-----------|---------|
-        | 🧠 **LLM Engine** | Google Gemini / OpenAI / Anthropic | Email variant generation |
-        | 🔄 **Orchestration** | LangGraph | Multi-step state machine pipeline |
-        | 📊 **Evaluation** | Bayesian A/B Testing (Beta-Binomial) | Statistical winner selection |
-        | 🚀 **API** | FastAPI | RESTful service layer |
-        | 📈 **Tracking** | MLflow | Experiment metrics & artifacts |
-        | 🐳 **Deployment** | Docker Compose | Full-stack orchestration |
-        | 🔁 **CI/CD** | GitHub Actions | Lint → Test → Build pipeline |
-        | 📦 **Data** | DVC | Versioned datasets & benchmarks |
-        """
-        )
-
-    with col2:
-        st.markdown("#### Pipeline Flow")
-        st.code(
-            """
-Customer Profile
-    │
-    ▼
-┌─────────────┐
-│   Segment   │
-└─────┬───────┘
-      ▼
-┌─────────────┐
-│  Generate   │
-│  Variants   │
-└─────┬───────┘
-      ▼
-┌─────────────┐
-│  Simulate   │
-│  A/B Test   │
-└─────┬───────┘
-      ▼
-┌─────────────┐
-│  Evaluate   │◄──┐
-│  (Bayesian) │   │
-└─────┬───────┘   │
-      │  No Winner│
-      ▼           │
-  Winner? ────────┘
-      │ Yes
-      ▼
-┌─────────────┐
-│   Update    │
-│   Prompts   │
-└─────────────┘
-            """,
-            language=None,
-        )
+    """Render the welcome / empty state."""
 
     # ── Segment Benchmarks ─────────────────────────────────────────
-    st.markdown("### 📊 Segment Performance Benchmarks")
+    st.markdown("### Segment Performance Benchmarks")
 
     df = load_benchmarks()
     if not df.empty:
@@ -1172,7 +1101,7 @@ Customer Profile
         """
     ---
     <div style="text-align: center; color: #64748b; font-size: 0.85rem;">
-        👈 Configure a customer profile in the sidebar and click <b>Run Campaign Pipeline</b> to start
+        Configure a customer profile in the sidebar and click <b>Run Campaign Pipeline</b> to start
     </div>
     """,
         unsafe_allow_html=True,
