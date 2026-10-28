@@ -525,7 +525,7 @@ def main():
         st.markdown("---")
 
         segments = get_segment_config()
-        segment_options = {v['label']: k for k, v in segments.items()}
+        segment_options = {v["label"]: k for k, v in segments.items()}
 
         selected_display = st.selectbox(
             "Customer Segment",
@@ -637,7 +637,7 @@ def main():
         for i, desc in enumerate(pipeline_steps):
             progress_bar.progress((i + 1) / len(pipeline_steps), text=desc)
             status_display.markdown(
-                f"<div style='text-align:center; color:#818cf8; font-weight:600;'>Running</div>",
+                "<div style='text-align:center; color:#818cf8; font-weight:600;'>Running</div>",
                 unsafe_allow_html=True,
             )
             time.sleep(0.5)
