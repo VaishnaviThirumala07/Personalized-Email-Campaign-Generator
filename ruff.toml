@@ -1,0 +1,6 @@
+# Ruff configuration — pinned rule set so lint results don't change
+# when a newer Ruff release enables additional default rules.
+target-version = "py311"
+
+[lint]
+select = ["E4", "E7", "E9", "F"]
